@@ -1,6 +1,7 @@
 import 'package:bitcoin_ticker_flutter/coin_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -46,6 +47,15 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 
+  Widget getPicker() {
+    if (Platform.isIOS) {
+      return iosPicker();
+    } else if (Platform.isAndroid) {
+      return androidDropDown();
+    }
+    return androidDropDown();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +92,7 @@ class _PriceScreenState extends State<PriceScreen> {
               alignment: Alignment.center,
               padding: EdgeInsets.only(bottom: 30.0),
               color: Colors.lightBlue,
-              child: iosPicker(),),
+              child: getPicker(),),
         ],
       ),
     );
