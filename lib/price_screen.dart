@@ -32,22 +32,18 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   CupertinoPicker getIosPicker() {
-    return CupertinoPicker(
-      itemExtent: 32,
-      onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
-      },
-      children: getPickerItems(),
-    );
-  }
-
-  List<Widget> getPickerItems() {
     List<Widget> pickerItems = [];
     for (String currency in currenciesList) {
       var newItem = Text(currency);
       pickerItems.add(newItem);
     }
-    return pickerItems;
+    return CupertinoPicker(
+      itemExtent: 32,
+      onSelectedItemChanged: (selectedIndex) {
+        print(selectedIndex);
+      },
+      children: pickerItems,
+    );
   }
 
   @override
