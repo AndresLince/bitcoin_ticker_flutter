@@ -7,14 +7,25 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  List<DropdownMenuItem> getDropDownItems() {
+    List<DropdownMenuItem<String>> dropDownItems = [];
 
-  void getDropDownItems() {
-    for (int i = 0; i < currenciesList.length; i ++) {
-      print(i);
+    for (int i = 0; i < currenciesList.length; i++) {
+      String currency = currenciesList[i];
+      var newItem = DropdownMenuItem(
+        value: currency,
+        child: Text(currency),
+      );
+
+      dropDownItems.add(newItem);
     }
+
+    return dropDownItems;
   }
+
   @override
   Widget build(BuildContext context) {
+    getDropDownItems();
     String? selectedCurrency = 'USD';
     return Scaffold(
       appBar: AppBar(
