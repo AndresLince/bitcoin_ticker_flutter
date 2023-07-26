@@ -52,7 +52,7 @@ class _PriceScreenState extends State<PriceScreen> {
 
   void getExchangeData() async {
     ExchangeModel exchangeModel = ExchangeModel();
-    dynamic rateData = await exchangeModel.getRateData();
+    dynamic rateData = await exchangeModel.getRateData(selectedCurrency);
     updateUI(rateData);
   }
 
@@ -67,8 +67,14 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     getExchangeData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
