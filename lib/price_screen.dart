@@ -1,4 +1,5 @@
 import 'package:bitcoin_ticker_flutter/coin_data.dart';
+import 'package:bitcoin_ticker_flutter/services/exchange.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io' show Platform;
@@ -24,7 +25,9 @@ class _PriceScreenState extends State<PriceScreen> {
     return DropdownButton(
       value: selectedCurrency,
       items: dropDownItems,
-      onChanged: (value) {
+      onChanged: (value) async {
+        ExchangeModel exchangeModel = ExchangeModel();
+        print(await exchangeModel.getRateData());
         setState(() {
           selectedCurrency = value;
         });
