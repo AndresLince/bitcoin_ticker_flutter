@@ -26,10 +26,8 @@ class _PriceScreenState extends State<PriceScreen> {
     return DropdownButton(
       value: selectedCurrency,
       items: dropDownItems,
-      onChanged: (value) async {
-        ExchangeModel exchangeModel = ExchangeModel();
-        dynamic rateData = await exchangeModel.getRateData();
-        updateUI(rateData);
+      onChanged: (value) {
+        getExchangeData();
         setState(() {
           selectedCurrency = value;
         });
@@ -52,6 +50,12 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 
+  void getExchangeData() async {
+    ExchangeModel exchangeModel = ExchangeModel();
+    dynamic rateData = await exchangeModel.getRateData();
+    updateUI(rateData);
+  }
+
   void updateUI(dynamic rateData) {
     setState(() {
       if (rateData == null) {
@@ -64,6 +68,7 @@ class _PriceScreenState extends State<PriceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getExchangeData();
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
