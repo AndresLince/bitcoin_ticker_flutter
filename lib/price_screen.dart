@@ -11,7 +11,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String? selectedCurrency = 'USD';
-  double rate = 0;
+  String rate = '?';
   DropdownButton<String> androidDropDown() {
     List<DropdownMenuItem<String>> dropDownItems = [];
 
@@ -28,7 +28,8 @@ class _PriceScreenState extends State<PriceScreen> {
       items: dropDownItems,
       onChanged: (value) async {
         ExchangeModel exchangeModel = ExchangeModel();
-        print(await exchangeModel.getRateData());
+        dynamic rateData = await exchangeModel.getRateData();
+        updateUI(rateData);
         setState(() {
           selectedCurrency = value;
         });
@@ -49,6 +50,16 @@ class _PriceScreenState extends State<PriceScreen> {
       },
       children: pickerItems,
     );
+  }
+
+  void updateUI(dynamic rateData) {
+    setState(() {
+      if (rateData == null) {
+        rate = '?';
+        return;
+      }
+      rate = rateData['rate'].toStringAsFixed(2);
+    });
   }
 
   @override
