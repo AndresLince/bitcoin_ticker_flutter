@@ -52,9 +52,9 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   void getExchangeData() async {
-    ExchangeModel exchangeModel = ExchangeModel();
+    /*ExchangeModel exchangeModel = ExchangeModel();
     dynamic rateData = await exchangeModel.getRateData(selectedCurrency);
-    updateUI(rateData);
+    updateUI(rateData);*/
   }
 
   void updateUI(dynamic rateData) {
@@ -112,7 +112,7 @@ class _PriceScreenState extends State<PriceScreen> {
     super.initState();
 
     for (String crypto in cryptoList) {
-      ExchangeModel exchangeModel = ExchangeModel();
+      ExchangeModel exchangeModel = ExchangeModel(cryptoName: crypto);
       exchangeModels.add(exchangeModel);
     }
     print(exchangeModels);
