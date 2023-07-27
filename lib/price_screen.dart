@@ -10,6 +10,7 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  List<ExchangeModel> exchangeModels = [];
   String? selectedCurrency = 'USD';
   String rate = '?';
   DropdownButton<String> androidDropDown() {
@@ -109,7 +110,13 @@ class _PriceScreenState extends State<PriceScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getExchangeData();
+
+    for (String crypto in cryptoList) {
+      ExchangeModel exchangeModel = ExchangeModel();
+      exchangeModels.add(exchangeModel);
+    }
+    print(exchangeModels);
+    //getExchangeData();
   }
 
   @override
