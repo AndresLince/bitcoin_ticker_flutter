@@ -5,7 +5,8 @@ const coinApiUrl = 'https://rest.coinapi.io/v1';
 
 class ExchangeModel {
   String cryptoName = '';
-  ExchangeModel({required cryptoName});
+  String rate = '?';
+  ExchangeModel({required this.cryptoName});
   Future<dynamic> getRateData(String? currency) async {
     final uri = Uri.parse(
         '$coinApiUrl/exchangerate/$cryptoName/$currency?apikey=$apiKey');

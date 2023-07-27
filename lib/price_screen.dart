@@ -67,10 +67,10 @@ class _PriceScreenState extends State<PriceScreen> {
     });
   }
 
-  List <Widget> createExchangeCards(String rate) {
+  List <Widget> createExchangeCards(List<ExchangeModel> exchangeModels) {
     List<Widget> exchangeCards = [];
-    for (String crypto in cryptoList) {
-      var newItem = createExchangeCard(crypto, rate);
+    for (ExchangeModel exchange in exchangeModels) {
+      var newItem = createExchangeCard(exchange.cryptoName, rate);
       exchangeCards.add(newItem);
     }
     exchangeCards.add( Container(
@@ -128,7 +128,7 @@ class _PriceScreenState extends State<PriceScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: createExchangeCards(rate),
+        children: createExchangeCards(exchangeModels),
       ),
     );
   }
