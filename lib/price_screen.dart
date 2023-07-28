@@ -59,17 +59,6 @@ class _PriceScreenState extends State<PriceScreen> {
     setState(() {
       exchangeModels = exchangeModels;
     });
-
-  }
-
-  void updateUI(dynamic rateData) {
-    setState(() {
-      if (rateData == null) {
-        rate = '?';
-        return;
-      }
-      rate = rateData['rate'].toStringAsFixed(2);
-    });
   }
 
   List <Widget> createExchangeCards(List<ExchangeModel> exchangeModels) {
