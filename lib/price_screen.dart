@@ -45,7 +45,10 @@ class _PriceScreenState extends State<PriceScreen> {
     return CupertinoPicker(
       itemExtent: 32,
       onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
+        getExchangeData(exchangeModels);
+        setState(() {
+          selectedCurrency = currenciesList[selectedIndex];
+        });
       },
       children: pickerItems,
     );
@@ -109,7 +112,6 @@ class _PriceScreenState extends State<PriceScreen> {
       ExchangeModel exchangeModel = ExchangeModel(cryptoName: crypto);
       exchangeModels.add(exchangeModel);
     }
-    //print(exchangeModels);
     getExchangeData(exchangeModels);
   }
 
