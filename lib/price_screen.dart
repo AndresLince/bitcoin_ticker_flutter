@@ -99,7 +99,7 @@ class _PriceScreenState extends State<PriceScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
           child: Text(
-            '1 $crypto = $rate USD',
+            '1 $crypto = $rate $selectedCurrency',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20.0,
