@@ -28,7 +28,7 @@ class _PriceScreenState extends State<PriceScreen> {
       value: selectedCurrency,
       items: dropDownItems,
       onChanged: (value) {
-        getExchangeData();
+        getExchangeData(exchangeModels);
         setState(() {
           selectedCurrency = value;
         });
@@ -51,10 +51,15 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 
-  void getExchangeData() async {
-    /*ExchangeModel exchangeModel = ExchangeModel();
-    dynamic rateData = await exchangeModel.getRateData(selectedCurrency);
-    updateUI(rateData);*/
+  void getExchangeData(List<ExchangeModel> exchangeModels) async {
+    for (ExchangeModel exchange in exchangeModels) {
+      dynamic rateData = await exchange.getRateData(selectedCurrency);
+      exchange.rate = rateData['rate'].toStringAsFixed(2);
+    }
+    setState(() {
+      exchangeModels = exchangeModels;
+    });
+
   }
 
   void updateUI(dynamic rateData) {
@@ -70,7 +75,7 @@ class _PriceScreenState extends State<PriceScreen> {
   List <Widget> createExchangeCards(List<ExchangeModel> exchangeModels) {
     List<Widget> exchangeCards = [];
     for (ExchangeModel exchange in exchangeModels) {
-      var newItem = createExchangeCard(exchange.cryptoName, rate);
+      var newItem = createExchangeCard(exchange.cryptoName, exchange.rate);
       exchangeCards.add(newItem);
     }
     exchangeCards.add( Container(
@@ -115,8 +120,8 @@ class _PriceScreenState extends State<PriceScreen> {
       ExchangeModel exchangeModel = ExchangeModel(cryptoName: crypto);
       exchangeModels.add(exchangeModel);
     }
-    print(exchangeModels);
-    //getExchangeData();
+    //print(exchangeModels);
+    getExchangeData(exchangeModels);
   }
 
   @override
